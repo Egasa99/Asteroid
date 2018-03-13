@@ -1,0 +1,15 @@
+.root {
+    -fx-background-color: lightblue;
+}
+
+
+#asteroide {
+    -fx-fill: lightpink;
+    -fx-stroke: red;
+}
+
+#Nave {
+    -fx-fill: green;
+    -fx-stroke:darkorchid
+}
+
