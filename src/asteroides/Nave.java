@@ -11,7 +11,7 @@ public class Nave {
     private double angulo = 0;
     private double velocidadNaveX = 0.0;
     private double velocidadNaveY = 0.0;
-    private final int velocidadgiro = 10;
+    private final int velocidadgiro = 15;
     private final double angulodireccion = 0;
     private double direccionX= 0;
     private double direccionY= 0;
@@ -67,6 +67,7 @@ public class Nave {
     // aumenta velocidadX
     public void setVelocidadNaveX() {
         velocidadNaveX += 1.0;
+    
     }
     // aumenta velocidadY
     public void setVelocidadNaveY() {
@@ -108,22 +109,29 @@ public class Nave {
             posicionNaveY = 0;
         }
         
-        if (velocidadNaveX >7) {
-        velocidadNaveX = 7;    
+        if (velocidadNaveX >4) {
+        velocidadNaveX = 4;    
         }
         
-        if (velocidadNaveY >7) {
-        velocidadNaveY = 7;    
+        if (velocidadNaveY >4) {
+        velocidadNaveY = 4;    
         }
         
-        if (velocidadNaveX <0) {
-        velocidadNaveX = 0;
-        }
+        //if (velocidadNaveX <0) {
+        //velocidadNaveX = 0;
+        //}
         
-        if (velocidadNaveY <0) {
-        velocidadNaveY = 0;
-        }
+        //if (velocidadNaveY <0) {
+        //velocidadNaveY = 0;
+        //}
 
+        if (angulo == 360) {
+        angulo = 0;
+        }
+        
+        if (angulo == -360) {
+        angulo = 0;
+        }
         }
     //permite el libre movimiento de la nave. 
     public void detectorDeAnguloParaGirar(){
@@ -137,13 +145,11 @@ public class Nave {
         direccionY = sin(Math.toRadians(angulo));
     }
 
-    public void naveAcelerar(){
-    posicionNaveX+= velocidadNaveX*direccionX;
-    posicionNaveY+= velocidadNaveY*direccionY;
+    public void naveMovimiento(){
+    posicionNaveX+= velocidadNaveX*(direccionX);
+    posicionNaveY+= velocidadNaveY*(direccionY);
+    System.out.println("velocidad*direccionX " + (velocidadNaveX*direccionX));
+        System.out.println("velocidad*direccionY "+ (velocidadNaveY*direccionY));
     }
 
-    public void movimiento(){
-    posicionNaveX+=direccionX;
-    posicionNaveY+=direccionY;
-    }
 }

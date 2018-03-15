@@ -14,16 +14,19 @@ import javafx.scene.shape.Polygon;
  */
 public class Fuegorl {
 Nave nave;
-private final int posicionFuegorlX = nave.getPosicionNaveX() -3;
-private final int posicionFuegorlY = nave.getPosicionNaveY() +10;
+private final int posicionFuegorlX;
+private final int posicionFuegorlY;
 private final Polygon fuegorl;
 
-public Fuegorl(Pane root) {
+public Fuegorl(Pane root, Nave naveActual) {
+    nave=naveActual;
+    posicionFuegorlX = nave.getPosicionNaveX() -3;
+    posicionFuegorlY = nave.getPosicionNaveY() +10;
     fuegorl = new Polygon();
     fuegorl.getPoints().addAll(new Double[]{
        -10.0,-4.0, //1Xinicial 1Yinicial
         -10.0,4.0, //2Xinicial 2Yinicial
-        -16.0,0.0 }); //3XInicial 3Yinicial   
+        -20.0,0.0 }); //3XInicial 3Yinicial   
     root.getChildren().add(fuegorl); 
 }
 public void posicionfuegorl(){
@@ -31,5 +34,8 @@ public void posicionfuegorl(){
     fuegorl.setLayoutY(posicionFuegorlY);
 }
 
+public Polygon getPoligonFuegorl(){
+    return fuegorl;
+}
 }
 

@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  */
 public class Asteroides extends Application {
 Nave nave;
-//Fuegorl fuegorl;
+Fuegorl fuegorl;
 Asteroide asteroide;
     @Override
     public void start(Stage primaryStage) {
@@ -28,6 +28,7 @@ Asteroide asteroide;
         // propiedades del panel (pantalla)
         Pane root = new Pane();
         nave = new Nave(root);
+        fuegorl = new Fuegorl(root,nave);
         Scene scene = new Scene(root,nave.getResolucionX(), nave.getResolucionY(),Color.WHITE);
         scene.getStylesheets().add("resources/css/css.css");
         primaryStage.setTitle("Asteroides");
@@ -42,36 +43,43 @@ Asteroide asteroide;
             Asteroide asteroide = new Asteroide(root);
             listaAsteroide.add(asteroide);
         }
+        
+        
 AnimationTimer animationPolygon= new AnimationTimer(){
         @Override
     public void handle(long now) {
         System.out.println("angulo " +nave.getAngulo());
         System.out.println("direccionX "+nave.getDireccionX());
         System.out.println("direccionY " +nave.getDireccionY());
-        nave.movimiento();
-        nave.mover();
+        System.out.println("velocidadX " +nave.getVelocidadNaveX());
+        System.out.println("velocidadY " +nave.getVelocidadNaveY());
+         nave.naveMovimiento();
+         nave.mover();
         nave.detectorDeAnguloParaGirar();
-        //fuegorl.posicionfuegorl();
+        fuegorl.posicionfuegorl();
         
         scene.setOnKeyPressed((KeyEvent event) -> {
             switch(event.getCode()) {
                 case LEFT:
                 nave.setAngulo1();
                 nave.rotacion();
-                nave.girarRad();
+                
                     break;
                 
                 case RIGHT:
                 nave.setAngulo2();
                 nave.rotacion();
-                nave.girarRad();
+                
                     break;
                 
                 case UP:
                 nave.setVelocidadNaveX();              
                 nave.setVelocidadNaveY();
-                nave.naveAcelerar();
-            }   //fuegorl.setVisible(false);
+                nave.naveMovimiento();
+                nave.girarRad();
+                fuegorl.getPoligonFuegorl().setVisible(false);
+            }   
+            
             
         });
 
