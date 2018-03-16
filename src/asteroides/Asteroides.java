@@ -20,15 +20,13 @@ import javafx.stage.Stage;
  */
 public class Asteroides extends Application {
 Nave nave;
-Fuegorl fuegorl;
+Bala bala;
 Asteroide asteroide;
     @Override
     public void start(Stage primaryStage) {
        
-        // propiedades del panel (pantalla)
         Pane root = new Pane();
         nave = new Nave(root);
-        fuegorl = new Fuegorl(root,nave);
         Scene scene = new Scene(root,nave.getResolucionX(), nave.getResolucionY(),Color.WHITE);
         scene.getStylesheets().add("resources/css/css.css");
         primaryStage.setTitle("Asteroides");
@@ -44,7 +42,8 @@ Asteroide asteroide;
             listaAsteroide.add(asteroide);
         }
         
-        
+        ArrayList <Bala> listaBala = new ArrayList();
+  
 AnimationTimer animationPolygon= new AnimationTimer(){
         @Override
     public void handle(long now) {
@@ -53,32 +52,44 @@ AnimationTimer animationPolygon= new AnimationTimer(){
         System.out.println("direccionY " +nave.getDireccionY());
         System.out.println("velocidadX " +nave.getVelocidadNaveX());
         System.out.println("velocidadY " +nave.getVelocidadNaveY());
-         nave.naveMovimiento();
-         nave.mover();
-        nave.detectorDeAnguloParaGirar();
-        fuegorl.posicionfuegorl();
         
+        asteroide.movimientoAsteroide();
+        nave.naveMovimiento();
+        nave.mover();
+        nave.detectorDeAnguloParaGirar();
+        
+        for (int i=0; i<listaBala.size(); i++){
+            bala = listaBala.get(i);
+            bala.movimientoBala(nave);
+        }
         scene.setOnKeyPressed((KeyEvent event) -> {
             switch(event.getCode()) {
                 case LEFT:
-                nave.setAngulo1();
-                nave.rotacion();
+                    nave.setAngulo1();
+                    nave.rotacion();
                 
                     break;
                 
                 case RIGHT:
-                nave.setAngulo2();
-                nave.rotacion();
+                    nave.setAngulo2();
+                    nave.rotacion();
                 
                     break;
                 
                 case UP:
-                nave.setVelocidadNaveX();              
-                nave.setVelocidadNaveY();
-                nave.naveMovimiento();
-                nave.girarRad();
-                fuegorl.getPoligonFuegorl().setVisible(false);
-            }   
+                    nave.setVelocidadNaveX();              
+                    nave.setVelocidadNaveY();
+                    nave.naveMovimiento();
+                    nave.girarRad();
+                    nave.fuegorl.setVisible(true);
+                break;
+                
+                case SPACE:
+                bala = new Bala(root , nave);
+                bala.AnguloBala(nave);
+                listaBala.add(bala);
+            }
+
             
             
         });
