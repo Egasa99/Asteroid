@@ -9,12 +9,12 @@ import javafx.scene.paint.Color;
 
 public class Nave {
     Group formNave = new Group();
-    private int posicionNaveX = 400;
-    private int posicionNaveY = 300;
+    private double posicionNaveX = 400;
+    private double posicionNaveY = 300;
     private double angulo = 0;
     private double velocidadNaveX = 0.0;
     private double velocidadNaveY = 0.0;
-    private final int velocidadgiro = 15;
+    private double velocidadgiro = 5;
     private final double angulodireccion = 0;
     
     public double direccionX= 0;
@@ -31,13 +31,14 @@ public class Nave {
        -10.0,5.0, //1Xinicial 1Yinicial
         10.0,0.0, //2Xinicial 2Yinicial
         -10.0,-5.0 }); //3XInicial 3Yinicial
+    
     fuegorl = new Polygon();
     fuegorl.setFill(Color.LAWNGREEN);
     fuegorl.getPoints().addAll(new Double[]{
-       -10.0,-4.0, //1Xinicial 1Yinicial
-        -10.0,4.0, //2Xinicial 2Yinicial
+        -10.0,-4.0,     //1Xinicial 1Yinicial
+        -10.0,4.0,     //2Xinicial 2Yinicial
         -20.0,0.0 }); //3XInicial 3Yinicial 
-    fuegorl.setLayoutX(polygon.getLayoutX()-2);
+    fuegorl.setLayoutX(polygon.getLayoutX());
     fuegorl.setLayoutY(polygon.getLayoutY());
     fuegorl.setVisible(false);
     formNave.getChildren().add(fuegorl);
@@ -47,6 +48,7 @@ public class Nave {
 
     public void rotacion() {
         formNave.setRotate(angulo);
+        angulo = angulo % 360;
     }
     
     public int getResolucionX() {
@@ -57,11 +59,11 @@ public class Nave {
         return resolucionY;
 }
     
-    public int getPosicionNaveX() {
+    public double getPosicionNaveX() {
         return posicionNaveX;
     } 
     
-    public int getPosicionNaveY() {
+    public double getPosicionNaveY() {
         return posicionNaveY;
     }
 
@@ -82,7 +84,7 @@ public class Nave {
     }
     // aumenta velocidadX
     public void setVelocidadNaveX() {
-        velocidadNaveX += 1.0;
+        velocidadNaveX = 0.98;
     
     }
 
@@ -91,13 +93,22 @@ public class Nave {
     }
     // aumenta velocidadY
     public void setVelocidadNaveY() {
-        velocidadNaveY += 1.0;
+        velocidadNaveY = 0.98;
     }
     
-    public int getVelocidadgiro() {
+    public double getVelocidadgiro() {
         return velocidadgiro;
     }
     
+    public double setVelocidadGiroconst() {
+    velocidadgiro++;
+    return 0;
+    }
+    
+    public double getVelocidadGirolimite() {
+    velocidadgiro-= 0.1;
+    return 0;
+    }
     public double getAngulodireccion() {
         return angulodireccion;
     }
@@ -111,7 +122,7 @@ public class Nave {
     }    
 
     // detecta si la nave esta en los bordes y los transporta al contrario
-    public void mover() {
+    public void limites() {
         if (posicionNaveX >resolucionX) {
             posicionNaveX = 0;
         }
@@ -125,29 +136,31 @@ public class Nave {
             posicionNaveY = 0;
         }
         
-        if (velocidadNaveX >4) {
-        velocidadNaveX = 4;    
+        if (velocidadgiro >= 0) {
+            velocidadgiro-= 0.1;
+        }
+        if (velocidadgiro <= 5) {
+            velocidadgiro++;
         }
         
-        if (velocidadNaveY >4) {
-        velocidadNaveY = 4;    
+        if (velocidadgiro >=20) {
+            velocidadgiro = 20;
+        }
+        if (direccionX >=4) {
+        direccionX = 4;    
         }
         
-        //if (velocidadNaveX <0) {
-        //velocidadNaveX = 0;
-        //}
-        
-        //if (velocidadNaveY <0) {
-        //velocidadNaveY = 0;
-        //}
-
-        if (angulo == 360) {
-        angulo = 0;
+        if (direccionY >=4) {
+        direccionY = 4;    
         }
         
-        if (angulo == -360) {
-        angulo = 0;
+        if (direccionX <=-4) {
+        direccionX = -4;    
         }
+        
+        if (direccionY <=-4) {
+        direccionY = -4;    
+        }         
         }
     //permite el libre movimiento de la nave. 
     public void detectorDeAnguloParaGirar(){
@@ -156,9 +169,8 @@ public class Nave {
     }
 
     public void girarRad() {
-        angulo = angulo % 360;
-        direccionX = cos(Math.toRadians(angulo));
-        direccionY = sin(Math.toRadians(angulo));
+        direccionX += cos(Math.toRadians(angulo));
+        direccionY += sin(Math.toRadians(angulo));
     }
 
     public void naveMovimiento(){

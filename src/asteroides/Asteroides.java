@@ -33,15 +33,14 @@ Asteroide asteroide;
         primaryStage.setScene(scene);
         primaryStage.show();
         // propiedades del rectangulo que debe ir debajo del triangulo
- 
+
         //crear lista asteroides
         ArrayList <Asteroide> listaAsteroide = new ArrayList();
             asteroide = new Asteroide(root);
         for (int i=0; i<10; i++) {
-            Asteroide asteroide = new Asteroide(root);
+            asteroide = new Asteroide(root);
             listaAsteroide.add(asteroide);
         }
-        
         ArrayList <Bala> listaBala = new ArrayList();
   
 AnimationTimer animationPolygon= new AnimationTimer(){
@@ -52,12 +51,12 @@ AnimationTimer animationPolygon= new AnimationTimer(){
         System.out.println("direccionY " +nave.getDireccionY());
         System.out.println("velocidadX " +nave.getVelocidadNaveX());
         System.out.println("velocidadY " +nave.getVelocidadNaveY());
-        
+        System.out.println("giro " +nave.getVelocidadgiro());
         asteroide.movimientoAsteroide();
         nave.naveMovimiento();
-        nave.mover();
+        nave.limites();
+        nave.getVelocidadGirolimite();
         nave.detectorDeAnguloParaGirar();
-        
         for (int i=0; i<listaBala.size(); i++){
             bala = listaBala.get(i);
             bala.movimientoBala(nave);
@@ -67,13 +66,13 @@ AnimationTimer animationPolygon= new AnimationTimer(){
                 case LEFT:
                     nave.setAngulo1();
                     nave.rotacion();
-                
+                    nave.setVelocidadGiroconst();
                     break;
                 
                 case RIGHT:
                     nave.setAngulo2();
                     nave.rotacion();
-                
+                    nave.setVelocidadGiroconst();
                     break;
                 
                 case UP:
@@ -90,8 +89,6 @@ AnimationTimer animationPolygon= new AnimationTimer(){
                 listaBala.add(bala);
             }
 
-            
-            
         });
 
     }
