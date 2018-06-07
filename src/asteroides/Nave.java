@@ -121,6 +121,8 @@ public class Nave {
         return direccionY;
     }    
 
+        
+
     // detecta si la nave esta en los bordes y los transporta al contrario
     public void limites() {
         if (posicionNaveX >resolucionX) {

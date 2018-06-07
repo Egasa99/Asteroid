@@ -22,24 +22,32 @@ public class Asteroides extends Application {
 Nave nave;
 Bala bala;
 Asteroide asteroide;
+public int resolucionX = 800;
+public int resolucionY = 400;
     @Override
     public void start(Stage primaryStage) {
        
+        
         Pane root = new Pane();
         nave = new Nave(root);
-        Scene scene = new Scene(root,nave.getResolucionX(), nave.getResolucionY(),Color.WHITE);
+        Scene scene = new Scene(root,resolucionX, resolucionY,Color.WHITE);
         scene.getStylesheets().add("resources/css/css.css");
         primaryStage.setTitle("Asteroides");
         primaryStage.setScene(scene);
         primaryStage.show();
-        // propiedades del rectangulo que debe ir debajo del triangulo
-
         //crear lista asteroides
         ArrayList <Asteroide> listaAsteroide = new ArrayList();
-            asteroide = new Asteroide(root);
         for (int i=0; i<10; i++) {
             asteroide = new Asteroide(root);
+            asteroide.posicion();
+            asteroide.rotacion();
             listaAsteroide.add(asteroide);
+            listaAsteroide.size();
+        }
+        // colisiones
+        if (nave.getPosicionNaveX() == asteroide.getPosicionAsteroideX()) {
+            //nave.setVisible(false);
+            //asteroide.setVisible(false);
         }
         ArrayList <Bala> listaBala = new ArrayList();
   
@@ -52,11 +60,20 @@ AnimationTimer animationPolygon= new AnimationTimer(){
         System.out.println("velocidadX " +nave.getVelocidadNaveX());
         System.out.println("velocidadY " +nave.getVelocidadNaveY());
         System.out.println("giro " +nave.getVelocidadgiro());
-        asteroide.movimientoAsteroide();
+        System.out.println("PosicionAbsoluta "+nave.getPosicionNaveX()+ nave.getPosicionNaveY());
         nave.naveMovimiento();
         nave.limites();
         nave.getVelocidadGirolimite();
         nave.detectorDeAnguloParaGirar();
+        
+        for (int i=0; i<listaAsteroide.size(); i++){
+            asteroide = listaAsteroide.get(i);
+            asteroide.movimientoAsteroide();
+            asteroide.posicion();
+            asteroide.setLimites();
+            asteroide.rotacion();
+        }
+        
         for (int i=0; i<listaBala.size(); i++){
             bala = listaBala.get(i);
             bala.movimientoBala(nave);
