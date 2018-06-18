@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 /**
@@ -44,15 +45,33 @@ public int resolucionY = 400;
             listaAsteroide.add(asteroide);
             listaAsteroide.size();
         }
-        // colisiones
-        if (nave.getPosicionNaveX() == asteroide.getPosicionAsteroideX()) {
-            //nave.setVisible(false);
-            //asteroide.setVisible(false);
-        }
         ArrayList <Bala> listaBala = new ArrayList();
   
 AnimationTimer animationPolygon= new AnimationTimer(){
-        @Override
+    //Asteroide-Nave
+    public void colision(){
+    for (int i= 0; i <listaAsteroide.size(); i++) {
+    Shape colisionNaveAst = Shape.intersect(nave.getPolygon(), asteroide.getPolygon());
+    boolean colisionVaciaNaveAsteroide = colisionNaveAst.getBoundsInLocal().isEmpty();
+    
+    if (colisionVaciaNaveAsteroide == false) {
+    }
+    
+    }
+    // Asteroide-Nave
+    for (int i= 0; i <listaAsteroide.size(); i++) {
+    Shape colisionNaveAst = Shape.intersect(nave.getPolygon(), asteroide.getPolygon());
+    boolean colisionVaciaNaveAsteroide = colisionNaveAst.getBoundsInLocal().isEmpty();
+    
+    if (colisionVaciaNaveAsteroide == false) {
+    }
+    
+    }
+}
+    
+    
+    @Override   
+
     public void handle(long now) {
         System.out.println("angulo " +nave.getAngulo());
         System.out.println("direccionX "+nave.getDireccionX());
@@ -60,7 +79,6 @@ AnimationTimer animationPolygon= new AnimationTimer(){
         System.out.println("velocidadX " +nave.getVelocidadNaveX());
         System.out.println("velocidadY " +nave.getVelocidadNaveY());
         System.out.println("giro " +nave.getVelocidadgiro());
-        System.out.println("PosicionAbsoluta "+nave.getPosicionNaveX()+ nave.getPosicionNaveY());
         nave.naveMovimiento();
         nave.limites();
         nave.getVelocidadGirolimite();
@@ -108,6 +126,7 @@ AnimationTimer animationPolygon= new AnimationTimer(){
 
         });
 
+        
     }
 };
     animationPolygon.start();

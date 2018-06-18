@@ -46,6 +46,9 @@ public class Nave {
     root.getChildren().add(formNave);
 }
 
+    public Polygon getPolygon(){
+        return this.polygon;
+    }
     public void rotacion() {
         formNave.setRotate(angulo);
         angulo = angulo % 360;
