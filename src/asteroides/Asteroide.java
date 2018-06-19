@@ -22,7 +22,7 @@ public class Asteroide {
         return posicionAsteroideX;
     }
 
-    public Polygon getPolygon(){
+    public Polygon getAsteroide(){
         return this.asteroide;
     }
     public double getPosicionAsteroideY(){

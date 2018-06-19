@@ -25,6 +25,7 @@ Bala bala;
 Asteroide asteroide;
 public int resolucionX = 800;
 public int resolucionY = 400;
+public int colisionVaciaNaveAsteroide = 1;
     @Override
     public void start(Stage primaryStage) {
        
@@ -51,21 +52,21 @@ AnimationTimer animationPolygon= new AnimationTimer(){
     //Asteroide-Nave
     public void colision(){
     for (int i= 0; i <listaAsteroide.size(); i++) {
-    Shape colisionNaveAst = Shape.intersect(nave.getPolygon(), asteroide.getPolygon());
+    Shape colisionNaveAst = Shape.intersect(nave.getPolygon(), asteroide.getAsteroide());
     boolean colisionVaciaNaveAsteroide = colisionNaveAst.getBoundsInLocal().isEmpty();
     
     if (colisionVaciaNaveAsteroide == false) {
     }
-    
+    root.getChildren().remove(nave.getPolygon());
     }
     // Asteroide-Nave
     for (int i= 0; i <listaAsteroide.size(); i++) {
-    Shape colisionNaveAst = Shape.intersect(nave.getPolygon(), asteroide.getPolygon());
-    boolean colisionVaciaNaveAsteroide = colisionNaveAst.getBoundsInLocal().isEmpty();
-    
-    if (colisionVaciaNaveAsteroide == false) {
+    Shape colisionNaveBA = Shape.intersect(asteroide.getAsteroide(), bala.getBala());
+    boolean colisionVaciaBalaAsteroide = colisionNaveBA.getBoundsInLocal().isEmpty();
+    if (colisionVaciaBalaAsteroide == false) {
     }
-    
+    root.getChildren().remove(bala.getBala());
+    root.getChildren().remove(asteroide.getAsteroide());
     }
 }
     

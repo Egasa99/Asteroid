@@ -25,6 +25,9 @@ public Bala(Pane root, Nave nave) {
     root.getChildren().add(Bala);
 }
 
+public Polygon getBala(){
+        return this.Bala;
+}
 public void AnguloBala(Nave nave) {
     double anguloBala = nave.getAngulo();
     direBalaX = velocidadBala*cos(Math.toRadians(anguloBala));
