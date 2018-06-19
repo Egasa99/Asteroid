@@ -20,7 +20,7 @@ public class Nave {
     public double direccionX= 0;
     public double direccionY= 0;
     private final Polygon polygon;
-    public final Polygon fuegorl;
+    public  final Polygon fuegorl;
     private final int resolucionX = 800; //Resolucion ventana eje X
     private final int resolucionY = 400; // Resolucion ventana eje Y
 
@@ -30,7 +30,7 @@ public class Nave {
     polygon.getPoints().addAll(new Double[]{
        -10.0,5.0, //1Xinicial 1Yinicial
         10.0,0.0, //2Xinicial 2Yinicial
-        -10.0,-5.0 }); //3XInicial 3Yinicial
+       -10.0,-5.0 }); //3XInicial 3Yinicial
     
     fuegorl = new Polygon();
     fuegorl.setFill(Color.LAWNGREEN);
@@ -49,6 +49,7 @@ public class Nave {
     public Polygon getPolygon(){
         return this.polygon;
     }
+    
     public void rotacion() {
         formNave.setRotate(angulo);
         angulo = angulo % 360;
@@ -131,12 +132,15 @@ public class Nave {
         if (posicionNaveX >resolucionX) {
             posicionNaveX = 0;
         }
+        
         if (posicionNaveX < 0) {
             posicionNaveX = resolucionX;
         }
+        
         if (posicionNaveY <0) {
             posicionNaveY = resolucionY;
         }
+        
         if (posicionNaveY > resolucionY) {
             posicionNaveY = 0;
         }
@@ -152,21 +156,22 @@ public class Nave {
             velocidadgiro = 20;
         }
         if (direccionX >=4) {
-        direccionX = 4;    
+            direccionX = 4;    
         }
         
         if (direccionY >=4) {
-        direccionY = 4;    
+            direccionY = 4;    
         }
         
         if (direccionX <=-4) {
-        direccionX = -4;    
+            direccionX = -4;    
         }
         
         if (direccionY <=-4) {
-        direccionY = -4;    
-        }         
+            direccionY = -4;    
         }
+        
+    }
     //permite el libre movimiento de la nave. 
     public void detectorDeAnguloParaGirar(){
         formNave.setLayoutX(posicionNaveX);
@@ -179,10 +184,10 @@ public class Nave {
     }
 
     public void naveMovimiento(){
-    posicionNaveX+= velocidadNaveX*(direccionX);
-    posicionNaveY+= velocidadNaveY*(direccionY);
-    System.out.println("velocidad*direccionX " + (velocidadNaveX*direccionX));
-        System.out.println("velocidad*direccionY "+ (velocidadNaveY*direccionY));
+        posicionNaveX+= velocidadNaveX*(direccionX);
+        posicionNaveY+= velocidadNaveY*(direccionY);
+        //System.out.println("velocidad*direccionX " + (velocidadNaveX*direccionX));
+        //System.out.println("velocidad*direccionY "+ (velocidadNaveY*direccionY));
     }
 
 }

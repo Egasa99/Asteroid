@@ -11,30 +11,33 @@ public class Bala {
     private int velocidadBala = 8;
     double direBalaX;
     double direBalaY;
-public Bala(Pane root, Nave nave) {
     
-    Bala = new Polygon();
-    Bala.getPoints().addAll(new Double[]{
-        0.0,2.0, //1Xinicial 1Yinicial
-        4.0,1.0, //2Xinicial 2Yinicial
-        0.0,0.0, //3XInicial 3Yinicial
-    });
-    Bala.setLayoutX(nave.getPosicionNaveX());
-    Bala.setLayoutY(nave.getPosicionNaveY());
-    Bala.setFill(Color.RED);
-    root.getChildren().add(Bala);
-}
+    public Bala(Pane root, Nave nave) {
 
-public Polygon getBala(){
+        Bala = new Polygon();
+        Bala.getPoints().addAll(new Double[]{
+            0.0,2.0, //1Xinicial 1Yinicial
+            4.0,1.0, //2Xinicial 2Yinicial
+            0.0,0.0, //3XInicial 3Yinicial
+        });
+        Bala.setLayoutX(nave.getPosicionNaveX());
+        Bala.setLayoutY(nave.getPosicionNaveY());
+        Bala.setFill(Color.RED);
+        root.getChildren().add(Bala);
+    }
+
+    public Polygon getBala(){
         return this.Bala;
-}
-public void AnguloBala(Nave nave) {
-    double anguloBala = nave.getAngulo();
-    direBalaX = velocidadBala*cos(Math.toRadians(anguloBala));
-    direBalaY = velocidadBala*sin(Math.toRadians(anguloBala));
-}
-public void movimientoBala(Nave nave) {
-    Bala.setLayoutX(Bala.getLayoutX()+direBalaX);
-    Bala.setLayoutY(Bala.getLayoutY()+direBalaY);
-}
+    }
+
+    public void AnguloBala(Nave nave) {
+        double anguloBala = nave.getAngulo();
+        direBalaX = velocidadBala*cos(Math.toRadians(anguloBala));
+        direBalaY = velocidadBala*sin(Math.toRadians(anguloBala));
+    }
+    
+    public void movimientoBala(Nave nave) {
+        Bala.setLayoutX(Bala.getLayoutX()+direBalaX);
+        Bala.setLayoutY(Bala.getLayoutY()+direBalaY);
+    }
 }

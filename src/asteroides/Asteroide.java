@@ -22,51 +22,58 @@ public class Asteroide {
         return posicionAsteroideX;
     }
 
-    public Polygon getAsteroide(){
-        return this.asteroide;
-    }
+    
+    
     public double getPosicionAsteroideY(){
         return posicionAsteroideY;
     }
 
-public void rotacion() {
+    public void rotacion() {
         asteroide.setRotate(velocidadgiro);
         angulo = angulo % 360;
     }
 
-public Asteroide(Pane root) {
-    asteroide = new Polygon();
-    asteroide.getPoints().addAll(new Double[]{
-        10.0,20.0,    //1Xinicial 1Yinicial
-        -30.0,10.0,   //2Xinicial 2Yinicial
-        -10.0,-30.0,  //3XInicial 3Yinicial
-        20.0,-10.0,   //4XInicial 4Yinicial
-    }); 
-       root.getChildren().add(asteroide);
+    public Asteroide(Pane root) {
+        asteroide = new Polygon();
+        asteroide.getPoints().addAll(new Double[]{
+            10.0,20.0,    //1Xinicial 1Yinicial
+            -30.0,10.0,   //2Xinicial 2Yinicial
+            -10.0,-30.0,  //3XInicial 3Yinicial
+            20.0,-10.0,   //4XInicial 4Yinicial
+        }); 
+        root.getChildren().add(asteroide);
 
-}
-
-public void posicion(){
-        asteroide.setLayoutX(posicionAsteroideX);
-        asteroide.setLayoutY(posicionAsteroideY);   
+    }
+    
+    public Polygon getAsteroide(){
+        return this.asteroide;
     }
 
-public void setLimites() {
-    if (posicionAsteroideX >resolucionX) {
+    public void posicion(){
+            asteroide.setLayoutX(posicionAsteroideX);
+            asteroide.setLayoutY(posicionAsteroideY);   
+        }
+
+    public void setLimites() {
+        if (posicionAsteroideX >resolucionX) {
             posicionAsteroideX = 0;
         }
+
         if (posicionAsteroideX < 0) {
             posicionAsteroideX = resolucionX;
         }
+        
         if (posicionAsteroideY <0) {
             posicionAsteroideY = resolucionY;
         }
+        
         if (posicionAsteroideY > resolucionY) {
             posicionAsteroideY = 0;
         }
-}
-public void movimientoAsteroide() {
-    posicionAsteroideX+= velocidadAsteroideX;
-    posicionAsteroideY+= velocidadAsteroideY;
-}
+        
+    }
+    public void movimientoAsteroide() {
+        posicionAsteroideX+= velocidadAsteroideX;
+        posicionAsteroideY+= velocidadAsteroideY;
+    }
 }
